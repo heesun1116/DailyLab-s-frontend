@@ -1,34 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import palette from '../../lib/palette';
-import Button from '../common/Button';
-import Responsive from '../common/Responsive';
+import Contribute from '../common/Contribute';
+
 import SubInfo from '../common/SubInfo';
 import Tags from '../common/Tags';
 
-const PostList = ({ posts, loading, error, showWriteButton }) => {
-  //에러발생시
+const PostList = ({ posts, loading, error }) => {
+  //error
 
   if (error) {
-    return <PostListBlock>에러가 발생했습니다.</PostListBlock>;
+    return <PostListBlock>error</PostListBlock>;
   }
   return (
     <PostListBlock>
-      <WritePostButtonWrapper>
-        {showWriteButton && (
-          <Button cyan to="/write">
-            새글작성하기
-          </Button>
-        )}
-        <Button cyan to="/upload">
-          Upload
-        </Button>
-        <Button cyan to="/git">
-          Git
-        </Button>
-      </WritePostButtonWrapper>
-
       {!loading && posts && (
         <div>
           {posts.map((post) => (
@@ -41,46 +26,127 @@ const PostList = ({ posts, loading, error, showWriteButton }) => {
 };
 
 const PostItem = ({ post }) => {
-  const { publishedDate, user, tags, title, body, _id } = post;
+  const { publishedDate, user, tags, title, body, _id, contributes, avatar } =
+    post;
+
   return (
     <PostItemBlock>
-      <h2>
-        <Link to={`/@${user.username}/${_id}`}>{title}</Link>
-      </h2>
-      <SubInfo username={user.username} publishedDate={publishedDate} />
-      <Tags tags={tags} />
-      <p>{body}</p>
+      <SubInfo
+        username={user.username}
+        id={_id}
+        publishedDate={publishedDate}
+        avatar={avatar}
+      />
+      <ContentDiv>
+        <Title>
+          <Link to={`/@${user.username}/${_id}`}>{title}</Link>
+        </Title>
+        <ContentBox>
+          <Link to={`/@${user.username}/${_id}`}>
+            <Content>{body}</Content>
+          </Link>
+        </ContentBox>
+      </ContentDiv>
+      <LastDiv>
+        {contributes === 'awesome' ? <Contribute awesome></Contribute> : null}
+        {contributes === 'notbad' ? <Contribute notbad></Contribute> : null}
+        {contributes === 'verygood' ? <Contribute verygood></Contribute> : null}
+        {contributes === 'good' ? <Contribute good></Contribute> : null}
+        <Tags tags={tags} />
+      </LastDiv>
     </PostItemBlock>
   );
 };
-const PostListBlock = styled(Responsive)`
-  margin-top: 3rem;
-`;
-const WritePostButtonWrapper = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  margin-right: 5rem;
-`;
-const PostItemBlock = styled.div`
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-  &:first-child {
-    padding-top: 0;
+const PostListBlock = styled.div`
+  width: 75%;
+  margin-top: 5.625rem;
+  margin-right: 3.125rem;
+  border-radius: 20px;
+  border: solid 1px #cfcfcf;
+  margin-left: 3rem;
+  @media screen and (max-width: 1024px) {
+    width: 95%;
   }
-  & + & {
-    border-top: 1px solid ${palette.gray[2]};
-  }
-  h2 {
-    font-size: 2rem;
-    margin-bottom: 0;
-    margin-top: 0;
-    &:hover {
-      color: ${palette.gray[6]};
-    }
-  }
-  p {
-    margin-top: 2rem;
+  @media screen and (max-width: 500px) {
+    width: 95%;
+    margin: 5rem 0 0 0;
   }
 `;
 
+const PostItemBlock = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 11rem;
+  margin: 25px 39px 0 39px;
+  &:first-child {
+    border-bottom: 0.063rem solid #efecec;
+  }
+  & + & {
+    border-bottom: 0.063rem solid #efecec;
+  }
+  @media screen and (max-width: 1024px) {
+    flex-wrap: wrap;
+    height: auto;
+    padding-bottom: 31px;
+    &:first-child {
+      padding-top: 33px;
+    }
+  }
+  @media screen and (max-width: 500px) {
+    flex-direction: column;
+    margin: 0;
+    height: auto;
+  }
+`;
+const ContentDiv = styled.div`
+  margin-left: 1.5rem;
+  width: 75%;
+  @media screen and (max-width: 1024px) {
+    width: 59%;
+    margin-left: 1%;
+  }
+  @media screen and (max-width: 500px) {
+    width: 90%;
+  }
+`;
+const LastDiv = styled.div`
+  width: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @media screen and (max-width: 1024px) {
+    width: 40%;
+    margin-left: 41%;
+    flex-direction: row;
+  }
+  @media screen and (max-width: 500px) {
+    width: 80%;
+    flex-direction: row;
+    margin-left: -10%;
+  }
+`;
+const Title = styled.h1`
+  overflow: hidden;
+  font-family: Poppins;
+  font-size: 1.25rem;
+  font-weight: bold;
+  letter-spacing: 0.4px;
+  text-align: left;
+  width: 90%;
+`;
+
+const Content = styled.p`
+  overflow: hidden;
+  font-family: NotoSans;
+  font-size: 0.938rem;
+  letter-spacing: 0.3px;
+  margin-top: 1rem;
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+const ContentBox = styled.div`
+  width: 90%;
+`;
 export default PostList;

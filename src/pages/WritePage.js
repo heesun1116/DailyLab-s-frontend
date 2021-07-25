@@ -1,23 +1,27 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import Responsive from '../components/common/Responsive';
-import ContributeBox from '../components/write/ContributeBox';
 
+import MainContainer from '../components/common/MainContainer';
+import HeaderContainer from '../container/common/HeaderContainer';
+import NavbarContainer from '../container/common/NavbarContainer';
 import EditContainer from '../container/write/EditContainer';
 import TagBoxContainer from '../container/write/TagBoxContainer';
 import WriteActionButtonsContainer from '../container/write/WriteActionButtonsContainer';
 
 const WritePage = () => {
   return (
-    <Responsive>
-      <Helmet>
-        <title>글 작성하기 - 앙's 블로구</title>
-      </Helmet>
-      <EditContainer />
-      <TagBoxContainer />
-      <ContributeBox />
-      <WriteActionButtonsContainer />
-    </Responsive>
+    <>
+      <NavbarContainer />
+      <HeaderContainer />
+      <MainContainer>
+        <Helmet>
+          <title>write - Daliy Lab's</title>
+        </Helmet>
+        <EditContainer />
+        <TagBoxContainer />
+        <WriteActionButtonsContainer />
+      </MainContainer>
+    </>
   );
 };
 

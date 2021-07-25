@@ -15,7 +15,7 @@ const LoginForm = ({ history }) => {
     user: user.user,
   }));
 
-  //인풋 변경 이벤트 핸들러
+  //event handler when input change
   const onChange = (e) => {
     const { value, name } = e.target;
     dispatch(
@@ -26,43 +26,43 @@ const LoginForm = ({ history }) => {
       }),
     );
   };
-  // 폼 등록 이벤트 핸들러
+  // event handler when form submits
   const onSubmit = (e) => {
     e.preventDefault();
     const { username, password } = form;
     dispatch(login({ username, password }));
   };
-  //컴포넌트가 처음 랜더링 될때 form 을 초기화함
+
   useEffect(() => {
     dispatch(initializeForm('login'));
   }, [dispatch]);
-  // 로그인 성공/ 실패 처리
 
   useEffect(() => {
     if (authError) {
-      //'오류 발생'
-      setError('로그인 실패');
+      //error
+      setError('Login fail');
       return;
     }
     if (auth) {
-      //'회원가입 성공'
+      //'succes register'
       dispatch(check());
     }
   }, [auth, authError, dispatch]);
-  // user 값이 잘 설정되어 있는지 확인
+  // Verify that user values are set well
 
   useEffect(() => {
     if (user) {
-      //'check API 성공
       history.push('/');
-      //로그인 상태 유지하기
+
+      //stay logged in
       try {
         localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('avatar', auth.avatar);
       } catch (e) {
         console.log('localStorage is not working');
       }
     }
-  }, [history, user]);
+  }, [auth, history, user]);
   return (
     <AuthForm
       type="login"

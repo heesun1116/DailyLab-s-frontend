@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useSelector } from 'react-redux';
 import { Route, Switch } from 'react-router';
-import Git from './pages/Git';
 import LoginPage from './pages/LoginPage';
 import PostListPage from './pages/PostListPage';
 import PostPage from './pages/PostPage';
 import RegisterPage from './pages/RegisterPage';
-import Upload from './pages/Upload';
+import UserPage from './pages/UserPage';
 import WritePage from './pages/WritePage';
 
 const App = () => {
@@ -15,6 +14,7 @@ const App = () => {
   const { user } = useSelector(({ user }) => ({
     user: user.user,
   }));
+
   useEffect(() => {
     if (user) {
       setIsLoggedIn(true);
@@ -22,6 +22,7 @@ const App = () => {
       setIsLoggedIn(false);
     }
   }, [user]);
+
   return (
     <>
       <Helmet>
@@ -30,7 +31,7 @@ const App = () => {
       <Switch>
         {isLoggedIn ? (
           <>
-            <Route path={['/@:username', '/']} exact component={PostListPage} />
+            <Route path="/" exact component={PostListPage} />
           </>
         ) : (
           <>
@@ -38,12 +39,11 @@ const App = () => {
           </>
         )}
       </Switch>
-      {/* username을 파라미터로 읽을 수 있음 */}
+
       <Route component={RegisterPage} path="/register" />
       <Route component={WritePage} path="/write" />
-      <Route component={PostPage} path="/@:username/:postId" />
-      <Route component={Upload} path="/upload" />
-      <Route component={Git} path="/git" />
+      <Route component={PostPage} exact strict path="/@:username/:postId" />
+      <Route component={UserPage} exact strict path="/@:username" />
     </>
   );
 };

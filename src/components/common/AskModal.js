@@ -6,8 +6,8 @@ const AskModal = ({
   visible,
   title,
   description,
-  confirmText = '확인',
-  cancelText = '취소',
+  confirmText = 'confirm',
+  cancelText = 'cancle',
   onConfirm,
   onCancle,
 }) => {

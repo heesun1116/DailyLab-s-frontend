@@ -1,17 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
-import palette from '../../lib/palette';
+
 import { Link } from 'react-router-dom';
 
 const TagsBlock = styled.div`
-  margin-top: 0.5rem;
+  display: flex;
+  justify-content: center;
+  margin-right: 0.5rem;
   .tag {
     display: inline-block;
-    color: ${palette.cyan[7]};
-    text-decoration: none;
-    margin-right: 0.5rem;
+    letter-spacing: 0.26px;
+    font-family: Poppins;
+    font-size: 0.8rem;
+    letter-spacing: 0.2px;
+    text-align: left;
+    color: #101010;
     &:hover {
-      color: ${palette.cyan[6]};
+      color: #3f3f3f;
     }
   }
 `;

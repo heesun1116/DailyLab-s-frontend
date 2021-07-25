@@ -1,22 +1,35 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Logo from '../common/Logo.svg';
 import styled from 'styled-components';
-import palette from '../../lib/palette';
 
-// 회원가입 로그인 페이지의 레이아웃 담당 컴포넌트
 const AuthTemplate = ({ children }) => {
   return (
     <AuthTemplateBlock>
-      <WhiteBox>
-        <div className="logo-area">
-          <Link to="/">REACTERS </Link>
-        </div>
-        {children}
-      </WhiteBox>
+      <LogoBox>
+        <img src={Logo} alt="" />
+        <LogoTitle>Daily Lab's</LogoTitle>
+      </LogoBox>
+      <WhiteBox>{children}</WhiteBox>
     </AuthTemplateBlock>
   );
 };
 
+const LogoBox = styled.div`
+  position: absolute;
+  display: flex;
+  img {
+    width: 3.135rem;
+    height: 2.096rem;
+  }
+  align-items: center;
+  top: 2.688rem;
+  left: 1.5rem;
+  gap: 15px;
+  @media screen and (max-width: 1007px) {
+    left: 0.5rem;
+    top: 1rem;
+  }
+`;
 const AuthTemplateBlock = styled.div`
   position: absolute;
   left: 0;
@@ -27,21 +40,22 @@ const AuthTemplateBlock = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: ${palette.gray[2]};
+  background: #ffffff;
+`;
+const LogoTitle = styled.h1`
+  font-family: Hammersmith One;
+  font-size: 1.25rem;
 `;
 const WhiteBox = styled.div`
-.logo-area{
-    display: block;
-    padding-bottom: 2rem;
-    text-align: center;
-    font-weight: bold;
-    letter-spacing: 2px;
-}
-box-shadow:  0 0 8px rgba(0, 0, 0, 0.025);
-    padding: 2rem;
-    width: 360px;
-    background: white;
-    border-radius: 2px;
-}
+  @media screen and (max-width: 500px) {
+    border: none;
+  }
+  @media screen and (max-width: 1024px) {
+    margin-top: 10rem;
+  }
+  width: 26.25rem;
+  background-color: #ffffff;
+  border: solid 1px #9d9d9d;
+  border-radius: 20px;
 `;
 export default AuthTemplate;

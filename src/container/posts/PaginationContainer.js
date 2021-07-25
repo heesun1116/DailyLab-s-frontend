@@ -11,10 +11,9 @@ const PaginationContainer = ({ location, match }) => {
     loading: loading['posts/LIST_POSTS'],
   }));
 
-  //포스트 데이터가 없거나 로딩중이면 아무것도 보여주지 않음
   if (!posts || loading) return null;
   const { username } = match.params;
-  //page가 없으면 1을 기본값으로 사용
+  //Use 1 as default if no page exists
   const { tag, page = 1 } = qs.parse(location.search, {
     ignoreQueryPrefix: true,
   });

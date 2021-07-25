@@ -1,14 +1,14 @@
 import client from './client';
 
-// 로그인
+//login
 
 export const login = ({ username, password }) =>
   client.post('/api/auth/login', { username, password });
 
-//회원가입
-export const register = ({ username, password }) =>
-  client.post('/api/auth/register', { username, password });
-// 로그인 상태 확인
+//register
+export const register = ({ username, password, avatar }) =>
+  client.post('/api/auth/register', { username, password, avatar });
+// check login statue
 export const check = () => client.get('/api/auth/check');
-//로그아웃
+//logout
 export const logout = () => client.post('/api/auth/logout');

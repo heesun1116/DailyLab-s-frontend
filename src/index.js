@@ -9,31 +9,37 @@ import './index.css';
 import rootReducer, { rootSaga } from './modules/index';
 import reportWebVitals from './reportWebVitals';
 import createSagaMiddleware from 'redux-saga';
-import { check, tempSetUser } from './modules/user';
+import { check, tempSetAvatar, tempSetUser } from './modules/user';
 import { HelmetProvider } from 'react-helmet-async';
 import dotenv from 'dotenv';
+import { ThemeProvider } from 'styled-components';
+import theme from './style/theme';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(sagaMiddleware)),
 );
-//로그인 상태 유지
-function loadUser() {
+//stay logged in
+const loadUser = () => {
   try {
     const user = localStorage.getItem('user');
-    if (!user) return; // 로그인 상태가 아니라면 아무것도 안함
+    const avatar = localStorage.getItem('avatar');
+    if (!user) return; // Do nothing if you are not logged in
     store.dispatch(tempSetUser(user));
+    store.dispatch(tempSetAvatar(avatar));
     store.dispatch(check());
   } catch (e) {
     console.log('localstorage is no working');
   }
-}
+};
+
 sagaMiddleware.run(rootSaga);
 loadUser();
 dotenv.config({ path: './' });
 ReactDOM.render(
   <Provider store={store}>
+    <ThemeProvider theme={theme} />
     <BrowserRouter>
       <HelmetProvider>
         <App />

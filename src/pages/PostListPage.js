@@ -1,18 +1,14 @@
 import React from 'react';
-import HeaderContainer from '../container/common/HeaderContainer';
-import PaginationContainer from '../container/posts/PaginationContainer';
+import NavbarContainer from '../container/common/NavbarContainer';
 import PostListContainer from '../container/posts/PostListContainer';
-import Upload from './Upload';
 
 const PostListPage = () => {
   return (
     <div>
-      <HeaderContainer />
+      <NavbarContainer />
       <PostListContainer />
-      <PaginationContainer />
-      <Upload />
+      {/* <PaginationContainer /> */}
     </div>
   );
 };
-
 export default PostListPage;

@@ -1,21 +1,19 @@
 import Quill from 'quill';
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import palette from '../../lib/palette';
-import Responsive from '../common/Responsive';
+
 import 'quill/dist/quill.bubble.css';
 
 //
-const Editor = ({ title, body, onChangeField }) => {
-  const quillElement = useRef(null); // quill을 적용할 divElement 설정
-  const quillInstance = useRef(null); // quill 인스턴스를 설정
+const Editor = ({ title, body, onChangeField, user }) => {
+  const quillElement = useRef(null); // set divElement to apply quill
+  const quillInstance = useRef(null); // setting quill instance
   useEffect(() => {
     quillInstance.current = new Quill(quillElement.current, {
       theme: 'bubble',
-      placeholder: '내용을 작성하세요...',
+      placeholder: 'content',
       modules: {
-        // 더 많은 옵션
-        // https://quilljs.com/docs/modules/toolbar/ 참고
+        // https://quilljs.com/docs/modules/toolbar/
         toolbar: [
           [{ header: '1' }, { header: '2' }],
           ['bold', 'italic', 'underline', 'strike'],
@@ -40,15 +38,12 @@ const Editor = ({ title, body, onChangeField }) => {
   }, [body]);
   const onChangeTitle = (e) => {
     onChangeField({ key: 'title', value: e.target.value });
+    onChangeField({ key: 'avatar', value: user.avatar });
   };
 
   return (
     <EditorBlock>
-      <TitleInput
-        placeholder="제목을 입력하세요"
-        onChange={onChangeTitle}
-        value={title}
-      />
+      <TitleInput placeholder="Title" onChange={onChangeTitle} value={title} />
       <QuillWrapper>
         <div ref={quillElement} className="quillElement"></div>
       </QuillWrapper>
@@ -56,22 +51,34 @@ const Editor = ({ title, body, onChangeField }) => {
   );
 };
 
-const EditorBlock = styled(Responsive)`
-  padding-top: 5rem;
+const EditorBlock = styled.div`
+  width: 75%;
+  height: 55%;
   padding-bottom: 5rem;
+  @media screen and (max-width: 500px) {
+    width: 90%;
+  }
 `;
 const TitleInput = styled.input`
   font-size: 3rem;
+  font-family: Hammersmith One;
   outline: none;
-  padding-bottom: 0.5rem;
+  padding-bottom: 2rem;
   border: none;
-  border-bottom: 1px solid ${palette.gray[4]};
+  border-bottom: 0.125rem solid #cbcbcb;
   margin-bottom: 2rem;
   width: 100%;
+  ::placeholder {
+    font-family: Hammersmith One;
+    font-size: 2.5rem;
+    color: #a8a8a8;
+    padding-bottom: 2.438rem;
+  }
 `;
 const QuillWrapper = styled.div`
   .ql-editor {
-    padding: 0px;
+    font-family: Poppins;
+    font-size: 0.938rem;
     min-height: 320px;
     font-size: 1.125rem;
     line-height: 1.5;

@@ -6,6 +6,7 @@ import user, { userSaga } from './user';
 import write, { writeSaga } from './write';
 import post, { postSaga } from './post';
 import posts, { postsSaga } from './posts';
+import userPosts, { userpostsSaga } from './userPosts';
 
 const rootReducer = combineReducers({
   auth,
@@ -14,10 +15,18 @@ const rootReducer = combineReducers({
   write,
   post,
   posts,
+  userPosts,
 });
 
 //
 export function* rootSaga() {
-  yield all([authSaga(), userSaga(), writeSaga(), postSaga(), postsSaga()]); // 함수들이 병행적으로 동시에 실행되고 모두 resolve 될떄까지 기다림
+  yield all([
+    authSaga(),
+    userSaga(),
+    writeSaga(),
+    postSaga(),
+    postsSaga(),
+    userpostsSaga(),
+  ]); // // functions run parallel and simultaneously and then Wait until they are all resolve
 }
 export default rootReducer;

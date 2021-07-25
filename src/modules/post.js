@@ -5,11 +5,8 @@ import createRequestSaga, {
   createRequestActionTypes,
 } from '../lib/createRequestSaga';
 
-const [
-  READ_POST,
-  READ_POST_SUCCESS,
-  READ_POST_FAILURE,
-] = createRequestActionTypes('post/READ_POST');
+const [READ_POST, READ_POST_SUCCESS, READ_POST_FAILURE] =
+  createRequestActionTypes('post/READ_POST');
 
 const UNLOAD_POST = 'post/UNLOAD_POST';
 

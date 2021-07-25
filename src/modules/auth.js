@@ -5,56 +5,60 @@ import * as authAPI from '../lib/api/auth';
 import createRequestSaga, {
   createRequestActionTypes,
 } from '../lib/createRequestSaga';
-// 리덕스로 폼 상태 관리 하기
+// manage form by redux
 const CHANGED_FIELD = 'auth/CHANGED_FIELD';
 const INITIALIZE_FORM = 'auth/INITIALIZE_FORM';
 
-// api 리덕스
+// api redux
 
-const [REGISTER, REGISTER_SUCCESS, REGISTER_FAILURE] = createRequestActionTypes(
-  'auth/REGISTER',
-);
-const [LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE] = createRequestActionTypes(
-  'auth/LOGIN',
-);
+const [REGISTER, REGISTER_SUCCESS, REGISTER_FAILURE] =
+  createRequestActionTypes('auth/REGISTER');
+const [LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE] =
+  createRequestActionTypes('auth/LOGIN');
 
 export const changeField = createAction(
   CHANGED_FIELD,
   ({ form, key, value }) => ({
     form, //register ,login
-    key, //username, password, passwordConfirm
-    value, // 실제 바꾸려는 값
+    key, //username, password, passwordConfirm ,avatar
+    value, // value that we want to change
   }),
 );
 export const initializeForm = createAction(INITIALIZE_FORM, (form) => form);
 
-export const register = createAction(REGISTER, ({ username, password }) => ({
-  username,
-  password,
-}));
+export const register = createAction(
+  REGISTER,
+  ({ username, password, avatar }) => ({
+    username,
+    password,
+    avatar,
+  }),
+);
 
 export const login = createAction(LOGIN, ({ username, password }) => ({
   username,
   password,
 }));
 
-// 사가 생성
+// create saga
 const registerSaga = createRequestSaga(REGISTER, authAPI.register);
 const loginSaga = createRequestSaga(LOGIN, authAPI.login);
 export function* authSaga() {
   yield takeLatest(REGISTER, registerSaga);
   yield takeLatest(LOGIN, loginSaga);
 }
-// state 생성
+// create state
 const initialState = {
   register: {
     username: '',
     password: '',
     passwordConfirm: '',
+    avatar: '',
   },
   login: {
     username: '',
     password: '',
+    avatar: '',
   },
   auth: null,
   authError: null,
@@ -64,31 +68,31 @@ const auth = handleActions(
   {
     [CHANGED_FIELD]: (state, { payload: { form, key, value } }) =>
       produce(state, (draft) => {
-        //produce 첫번째 파라미터는 수정하고 싶은 상태, 두번째 파라미터는 상태를 어떻게 업데이트할지 정의하는 함수
-        draft[form][key] = value; // 예 state.register.username을 바꾼다.
+        //produce : The first parameter is the state you want to modify, and the second parameter is a function that defines how to update the state.
+        draft[form][key] = value; // ex) 'state.register.username' will change.
       }),
     [INITIALIZE_FORM]: (state, { payload: form }) => ({
       ...state,
       [form]: initialState[form],
     }),
-    //회원가입성공
+    //success register
     [REGISTER_SUCCESS]: (state, { payload: auth }) => ({
       ...state,
       authError: null,
       auth,
     }),
-    //회원가입 실패
+    //fail register
     [REGISTER_FAILURE]: (state, { payload: error }) => ({
       ...state,
       authError: error,
     }),
-    //로그인 성공
+    //success login
     [LOGIN_SUCCESS]: (state, { payload: auth }) => ({
       ...state,
       authError: null,
       auth,
     }),
-    // 로그인 실패
+    // fail login
     [LOGIN_FAILURE]: (state, { payload: error }) => ({
       ...state,
       authError: error,

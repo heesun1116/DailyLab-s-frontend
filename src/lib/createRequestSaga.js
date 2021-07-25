@@ -12,11 +12,11 @@ export default function createRequestSaga(type, request) {
   const FAILURE = `${type}_FAILURE`;
 
   return function* (action) {
-    yield put(startLoading(type)); // 로딩 시작 특정 행동을 디스패치
+    yield put(startLoading(type)); // Load Start Dispatch Specific Behavior
     try {
-      const response = yield call(request, action.payload); // request는 함수, 두번째는 파라미터 call 을 요청하면 promise생성
+      const response = yield call(request, action.payload); // request is a function, and the second request is a parameter call.
       yield put({
-        //액션을 디스패치
+        //dispath action
         type: SUCCESS,
         payload: response.data,
         meta: response,

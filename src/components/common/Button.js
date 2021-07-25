@@ -8,20 +8,21 @@ const Button = (props) => {
     <StyledLink {...props} cyan={props.cyan ? 1 : 0} />
   ) : (
     <StyledButton {...props} />
-  ); // button 이 받아오는 props를 모두 button에 전달
+  );
 };
 const buttonstyle = css`
   border: none;
-  border-radius: 4px;
-  font-size: 1rem;
-  font-weight: bold;
-  padding: 0.2rem 1rem;
+  border-radius: 10px;
+  font-family: NotoSans;
+  font-size: 0.938rem;
+  padding: 0.375rem 1.5rem;
   color: white;
+  letter-spacing: 0.3px;
   outline: none;
   cursor: pointer;
-  background: ${palette.gray[8]};
+  background: #9dc8c8;
   &:hover {
-    background: ${palette.gray[6]};
+    background: #cae0e0;
   }
   ${(props) =>
     props.fullWidth &&
@@ -32,11 +33,11 @@ const buttonstyle = css`
       font-size: 1.125rem;
     `}
   ${(props) =>
-    props.cyan &&
+    props.purple &&
     css`
-      background: ${palette.cyan[5]};
+      background: #d1b6e1;
       &:hover {
-        background: ${palette.cyan[4]};
+        background: #e3d6eb;
       }
     `}
     &:disabled {

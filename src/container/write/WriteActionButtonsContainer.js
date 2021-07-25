@@ -1,23 +1,33 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import WriteActionButtons from '../../components/write/WriteActionButtons';
 import { useSelector, useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { updatePost, writePost } from '../../modules/write';
 
 const WriteActionButtonsContainer = ({ history }) => {
+  const [error, setError] = useState(null);
   const dispatch = useDispatch();
-  const { title, body, tags, post, postError, originalPostId, contributes } =
-    useSelector(({ write }) => ({
-      title: write.title,
-      body: write.body,
-      tags: write.tags,
-      post: write.post,
-      postError: write.postError,
-      contributes: write.contributes,
-      originalPostId: write.originalPostId,
-    }));
+  const {
+    title,
+    body,
+    tags,
+    post,
+    postError,
+    originalPostId,
+    contributes,
+    avatar,
+  } = useSelector(({ write }) => ({
+    title: write.title,
+    body: write.body,
+    tags: write.tags,
+    post: write.post,
+    postError: write.postError,
+    contributes: write.contributes,
+    originalPostId: write.originalPostId,
+    avatar: write.avatar,
+  }));
 
-  // 포스트 등록
+  // publish post
   const onPublish = () => {
     if (originalPostId) {
       dispatch(
@@ -30,16 +40,17 @@ const WriteActionButtonsContainer = ({ history }) => {
         body,
         tags,
         contributes,
+        avatar,
       }),
     );
   };
 
-  // 취소
+  // cancel
   const onCancel = () => {
     history.goBack();
   };
 
-  // 성공 혹은 실패시 할 작업
+  // when success or fail is happend
   useEffect(() => {
     if (post) {
       const { _id, user } = post;
@@ -47,6 +58,7 @@ const WriteActionButtonsContainer = ({ history }) => {
     }
     if (postError) {
       console.log(postError);
+      setError('please fill the all blank!');
     }
   }, [history, post, postError]);
   return (
@@ -54,6 +66,7 @@ const WriteActionButtonsContainer = ({ history }) => {
       onPublish={onPublish}
       onCancel={onCancel}
       isEdit={!originalPostId}
+      error={error}
     />
   );
 };

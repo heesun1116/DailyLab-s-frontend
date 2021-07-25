@@ -1,68 +1,12 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/palette';
+import ContributeBox from './ContributeBox';
 
-const TagBoxBlock = styled.div`
-  width: 100%;
-  border-top: 1px solid ${palette.gray[2]};
-  padding-top: 2rem;
-  h4 {
-    color: ${palette.gray[8]};
-    margin-top: 0;
-    margin-bottom: 0.5rem;
-  }
-`;
-
-const TagForm = styled.form`
-  border-radius: 4px;
-  overflow: hidden;
-  display: flex;
-  width: 256px;
-  border: 1px solid ${palette.gray[9]}; /* 스타일 초기화 */
-  input,
-  button {
-    outline: none;
-    border: none;
-    font-size: 1rem;
-  }
-  input {
-    padding: 0.5rem;
-    flex: 1;
-  }
-  button {
-    cursor: pointer;
-    padding-right: 1rem;
-    padding-left: 1rem;
-    border: none;
-    background: ${palette.gray[8]};
-    color: white;
-    font-weight: bold;
-    &:hover {
-      background: ${palette.gray[6]};
-    }
-  }
-`;
-
-const Tag = styled.div`
-  margin-right: 0.5rem;
-  color: ${palette.gray[6]};
-  cursor: pointer;
-  &:hover {
-    opacity: 0.5;
-  }
-`;
-
-const TagListBlock = styled.div`
-  display: flex;
-  margin-top: 0.5rem;
-`;
-
-// React.memo를 사용하여 tag 값이 바뀔 때만 리렌더링되도록 처리
 const TagItem = React.memo(({ tag, onRemove, onChangeTags }) => (
   <Tag onClick={() => onRemove(tag)}>#{tag}</Tag>
 ));
-
-// React.memo를 사용하여 tags 값이 바뀔 때만 리렌더링되도록 처리
+s;
 const TagList = React.memo(({ tags, onRemove }) => (
   <TagListBlock>
     {tags.map((tag) => (
@@ -77,8 +21,8 @@ const TagBox = ({ tags, onChangeTags }) => {
 
   const insertTag = useCallback(
     (tag) => {
-      if (!tag) return; // 공백이라면 추가하지 않음
-      if (localTags.includes(tag)) return; // 이미 존재한다면 추가하지 않음
+      if (!tag) return;
+      if (localTags.includes(tag)) return;
       const nextTags = [...localTags, tag];
       setLocalTags(nextTags);
       onChangeTags(nextTags);
@@ -102,31 +46,86 @@ const TagBox = ({ tags, onChangeTags }) => {
   const onSubmit = useCallback(
     (e) => {
       e.preventDefault();
-      insertTag(input.trim()); // 앞뒤 공백 없앤 후 등록
-      setInput(''); // input 초기화
+      insertTag(input.trim());
+      setInput('');
     },
     [input, insertTag],
   );
 
-  // tags 값이 바뀔 때
+  // When the tags value changes
   useEffect(() => {
     setLocalTags(tags);
   }, [tags]);
 
   return (
     <TagBoxBlock>
-      <h4>태그</h4>
       <TagForm onSubmit={onSubmit}>
-        <input
-          placeholder="태그를 입력하세요"
-          value={input}
-          onChange={onChange}
-        />
-        <button type="submit">추가</button>
+        <input placeholder="#TAG" value={input} onChange={onChange} />
+        <button type="submit">Submit</button>
       </TagForm>
+      <ContributeBox />
       <TagList tags={localTags} onRemove={onRemove} />
     </TagBoxBlock>
   );
 };
+
+const TagBoxBlock = styled.div`
+  @media screen and (max-width: 1024px) {
+    margin-left: 3rem;
+  }
+  @media screen and (max-width: 500px) {
+    margin: 0 0 17px 0;
+  }
+`;
+
+const TagForm = styled.form`
+  display: flex;
+  margin-top: 3.375rem;
+  input,
+  button {
+    outline: none;
+    border: none;
+    font-size: 1rem;
+  }
+  input {
+    width: 5.375rem;
+    ::placeholder {
+      font-family: Roboto;
+      font-size: 1.25rem;
+      color: #a073bb;
+    }
+  }
+  button {
+    letter-spacing: 0.28px;
+    color: #ffffff;
+    font-family: Noto Sans;
+    font-size: 0.875rem;
+    font-weight: bold;
+    width: 7.438rem;
+    height: 1.938rem;
+    margin-left: 1.875rem;
+    padding: 0.375rem 1.5rem;
+    border-radius: 10px;
+    background-image: radial-gradient(circle at 0 0, #9dc8c8, #d1b6e1);
+    color: white;
+  }
+  @media screen and (max-width: 500px) {
+    margin-bottom: 17px;
+  }
+`;
+
+const Tag = styled.div`
+  margin-right: 0.5rem;
+  color: ${palette.gray[6]};
+  cursor: pointer;
+  &:hover {
+    opacity: 0.5;
+  }
+`;
+
+const TagListBlock = styled.div`
+  display: flex;
+  color: #c8c8c8;
+`;
 
 export default TagBox;
