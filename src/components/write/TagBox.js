@@ -6,7 +6,7 @@ import ContributeBox from './ContributeBox';
 const TagItem = React.memo(({ tag, onRemove, onChangeTags }) => (
   <Tag onClick={() => onRemove(tag)}>#{tag}</Tag>
 ));
-s;
+
 const TagList = React.memo(({ tags, onRemove }) => (
   <TagListBlock>
     {tags.map((tag) => (
