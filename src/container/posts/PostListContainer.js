@@ -10,7 +10,7 @@ import HeaderContainer from '../common/HeaderContainer';
 
 const PostListContainer = ({ location }) => {
   const dispatch = useDispatch();
-  const { posts, error, loading, user, auth } = useSelector(
+  const { posts, error, loading, user } = useSelector(
     ({ posts, loading, user, auth }) => ({
       posts: posts.posts,
       error: posts.error,

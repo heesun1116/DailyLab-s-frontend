@@ -9,7 +9,7 @@ import HeaderContainer from '../common/HeaderContainer';
 import PostList from '../../components/posts/PostList';
 
 const UserListContainer = ({ location, match }) => {
-  const { user, posts, loading, auth } = useSelector(
+  const { user, posts, loading } = useSelector(
     ({ user, userPosts, loading, auth }) => ({
       user: user,
       posts: userPosts.posts,
