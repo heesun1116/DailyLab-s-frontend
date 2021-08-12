@@ -1,2 +1,2 @@
 /*
- Access-Control-Allow-Origin : "https://romantic-bassi-fc7bca.netlify.app/"
+ Access-Control-Allow-Origin : 'https://daily-labs.herokuapp.com/api/auth/login'
