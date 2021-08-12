@@ -1,2 +1,3 @@
 /*
  Access-Control-Allow-Origin : 'https://daily-labs.herokuapp.com/'
+ Access-Control-Allow-Origin: *
