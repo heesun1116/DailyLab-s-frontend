@@ -6,7 +6,7 @@ import ContributeBox from './ContributeBox';
 const TagItem = React.memo(({ tag, onRemove, onChangeTags }) => (
   <Tag onClick={() => onRemove(tag)}>#{tag}</Tag>
 ));
-s;
+
 const TagList = React.memo(({ tags, onRemove }) => (
   <TagListBlock>
     {tags.map((tag) => (
@@ -60,7 +60,11 @@ const TagBox = ({ tags, onChangeTags }) => {
   return (
     <TagBoxBlock>
       <TagForm onSubmit={onSubmit}>
-        <input placeholder="#TAG" value={input} onChange={onChange} />
+        <input
+          placeholder="#please enter your tag"
+          value={input}
+          onChange={onChange}
+        />
         <button type="submit">Submit</button>
       </TagForm>
       <ContributeBox />
@@ -88,10 +92,10 @@ const TagForm = styled.form`
     font-size: 1rem;
   }
   input {
-    width: 5.375rem;
+    width: 10rem;
     ::placeholder {
       font-family: Roboto;
-      font-size: 1.25rem;
+      font-size: 1rem;
       color: #a073bb;
     }
   }

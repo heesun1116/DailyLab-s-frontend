@@ -11,7 +11,7 @@ const Editor = ({ title, body, onChangeField, user }) => {
   useEffect(() => {
     quillInstance.current = new Quill(quillElement.current, {
       theme: 'bubble',
-      placeholder: 'content',
+      placeholder: 'please write your content',
       modules: {
         // https://quilljs.com/docs/modules/toolbar/
         toolbar: [
@@ -43,7 +43,11 @@ const Editor = ({ title, body, onChangeField, user }) => {
 
   return (
     <EditorBlock>
-      <TitleInput placeholder="Title" onChange={onChangeTitle} value={title} />
+      <TitleInput
+        placeholder="Please write your title"
+        onChange={onChangeTitle}
+        value={title}
+      />
       <QuillWrapper>
         <div ref={quillElement} className="quillElement"></div>
       </QuillWrapper>
