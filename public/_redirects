@@ -1,2 +1,4 @@
 /* /index.html 200
+/*
+Access-Control-Allow-Origin: *
 /api/* https://daily-labs.herokuapp.com/api/:splat 200
