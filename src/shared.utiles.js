@@ -15,6 +15,7 @@ export const uploadToS3 = async (file, userId, folderName) => {
     .upload({
       Bucket: 'dailylab',
       Key: objectName,
+      Expires: 60,
       ACL: 'public-read',
       Body: readStream, //fire(strem)
     })

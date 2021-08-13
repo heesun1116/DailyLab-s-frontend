@@ -31,6 +31,7 @@ const AuthForm = ({ type, form, onChange, onSubmit, error }) => {
       bucketName: bucketName,
       dirName: dirName,
       region: region,
+      Expires: 60,
       accessKeyId: accessKetId,
       secretAccessKey: secretAcessKey,
     };
