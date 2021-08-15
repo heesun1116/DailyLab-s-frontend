@@ -22,6 +22,6 @@ We can see a similar feature like Instagram on ‘Heestagram’.
 The meaning of the Logo is that communicate with my friends every day.
 Through the  gradation of color, I tried to express the diversity
 
-'DemoSite'
+### 'DemoSite'
 
 
