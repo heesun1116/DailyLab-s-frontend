@@ -25,6 +25,8 @@ Users can identify the achievement by the color(ex. Alice blue -good)
 Also, the concept is simple and modern. I chose the color to give an intelligent and friendly feeling.
 Logo design means that the effort made by every day can be the one we want and achieve.
 
-### 'DemoSite'
+### [DemoSite](http://34.203.193.71:4000/)
 
-
+### How To Use 👏
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/70732062/129496510-fed2630b-536e-4917-87ce-d5b721e62aa9.gif)
+![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/70732062/129496516-0e363a1d-3254-4794-ad45-9e09e0f75b25.gif)
