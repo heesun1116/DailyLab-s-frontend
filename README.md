@@ -1,8 +1,10 @@
-# Getting Started with Create React App
+# Daily Lab's
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project background
+The Daily Lab is a service that was made with my friend’s college lab life motif. They write five sentences of research every day and also evaluate the achievement of that day. So I build this service by using React and Redux for the frontend, Node.js for the back-end, Mongo DB for Database. The Daily Lab was carried out while studying the blog-making project in the book.
+Also, I got a simple and intuitive UI/UX Design concept. This concept makes the User see and write the post intuitively. 
 
-## Available Scripts
+## Project feature
 
 In the project directory, you can run:
 
