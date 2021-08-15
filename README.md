@@ -6,15 +6,16 @@ Also, I got a simple and intuitive UI/UX Design concept. This concept makes the 
 
 ## 02. Project feature
 
-We can see a similar feature like Instagram on ‘Heestagram’.
-- Login/Register/Log out
-- Edit profile
+The Daily Lab feature is similar to the blog. ✏️
+- Login/Regiser/Log out
+- Write Post
+- Delete Post 
+- Rewrite Post
 - See Post
-- Upload Post/ Delete Post
-- Like Post
-- Comment Post
-- Follow/ Unfollow User
-- Find Friends
+- See my Post
+- Search the Post by tag
+- Upload avatar can be allowed when the User signs up only. If Users don't upload their avatar, they won't be able to sign up. 
+The reason for this is that we identify the user by the avatar from each other apparently.
 
 ## 03. Project Design
 
